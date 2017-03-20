@@ -18,70 +18,163 @@ void usageExit() {
     exit(1);
 }
 
-void *halt (struct VMcontext* ctx, const uint32_t instr){
-	
+void halt (struct VMcontext* ctx, const uint32_t instr){
+
+	is_running = false;
 	printf("Terminate the proccess  \n");
 }
 
-void *load (struct VMcontext* ctx, const uint32_t instr){
+void load (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+	const uint32_t addr = ctx->r[r1].value;
+	ctx->[r0].value = 0x000000ff & read_mem(ctx, addr);
+
+        printf("Load a value  \n");
+	
 }
 
-void *store (struct VMcontext* ctx, const uint32_t instr){
+void store (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+	const uint32_t addr = ctx->r[r0].value;
+	write_mem(ctx, addr, EXTRACT_B0(ctx->[r1].value));
+
+        printf("Store \n");
+
 }
 
-void *move (struct VMcontext* ctx, const uint32_t instr){
+void move (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
-	}
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+	ctx->r[r0].value = ctx->r[r1].value;
+	
+        printf("Move  \n");
+}
 
-void *puti (struct VMcontext* ctx, const uint32_t instr){
+void puti (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
-	}
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t imm = EXTRACT_B2(instr);
+	ctx->r[r0].value = 0x000000ff & imm;
 
-void *add (struct VMcontext* ctx, const uint32_t instr){
+        printf("Puti  \n");
+}
 
-        printf("Terminate the proccess  \n");
-	}
-void *sub (struct VMcontext* ctx, const uint32_t instr){
+void add (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
-	}
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+        const uint8_t r2 = EXTRACT_B3(instr);
+	ctx->r[r0].value = ctx->r[r1].value + ctx->r[r2].value;
 
-void *gt (struct VMcontext* ctx, const uint32_t instr){
+        printf("Add  \n");
+}
 
-        printf("Terminate the proccess  \n");
-	}
+void sub (struct VMcontext* ctx, const uint32_t instr){
 
-void *ge (struct VMcontext* ctx, const uint32_t instr){
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+        const uint8_t r2 = EXTRACT_B3(instr);
+	ctx->r[r0].value = ctx->r[r1].value - ctx->r[r2].value;
 
-        printf("Terminate the proccess  \n");
-	}
-void *eq (struct VMcontext* ctx, const uint32_t instr){
+	printf("Sub  \n");
+}
 
-        printf("Terminate the proccess  \n");
-	}
-void *ite (struct VMcontext* ctx, const uint32_t instr){
+void gt (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
-	}
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+        const uint8_t r2 = EXTRACT_B3(instr);
+	if (ctx->r[r1].value > ctx->r[r2].value)
+	    ctx->r[r0].value = 1;
+	else
+	ctx->r[r0].value = 0;
 
-void *jump (struct VMcontext* ctx, const uint32_t instr){
+        printf("Gt  \n");
+}
 
-        printf("Terminate the proccess  \n");
-	}
-void *puts (struct VMcontext* ctx, const uint32_t instr){
+void ge (struct VMcontext* ctx, const uint32_t instr){
 
-        printf("Terminate the proccess  \n");
-	}
-void *gets (struct VMcontext* ctx, const uint32_t instr){
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+        const uint8_t r2 = EXTRACT_B3(instr);
+	if (ctx->r[r1].value >= ctx->r[r2].value)
+	    ctx->r[r0].value = 1;
+	else
+	ctx->r[r0].value = 0;
 
-        printf("Terminate the proccess  \n");
-	}
+        printf("Ge  \n");
+}
+
+void eq (struct VMcontext* ctx, const uint32_t instr){
+
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t r1 = EXTRACT_B2(instr);
+        const uint8_t r2 = EXTRACT_B3(instr);
+	if (ctx->r[r1].value == ctx->r[r2].value)
+	    ctx->r[r0].value = 1;
+	else
+	ctx->r[r0].value = 0;
+
+        printf("Eq  \n");
+}
+
+void ite (struct VMcontext* ctx, const uint32_t instr){
+
+	const uint8_t r0 = EXTRACT_B1(instr);
+	const uint8_t imm1 = EXTRACT_B2(instr);
+	const uint8_t imm2 = EXTRACT_B3(instr);
+	if (ctx->r[r0].value > 0)
+	    ctx->pc = imm1;
+	else
+	ctx->pc = imm2;
+
+        printf("Ite  \n");	
+}
+
+void jump (struct VMcontext* ctx, const uint32_t instr){
+
+	const uint8_t imm = EXTRACT_B1(instr);
+	ctx->pc = imm;
+
+	printf("Jump  \n");
+}
+
+void puts (struct VMcontext* ctx, const uint32_t instr){
+
+	const uint8_t r0 = EXTRACT_B1(instr);
+	uint32_t addr = ctx->r[r0].value;
+        uint8_t val;
+	while(true) {
+		val = read_mem(ctx, addr);
+		if (val) {
+			putchar(val);
+			addr++;
+		}
+		else
+			break;
+		}
+
+	printf("puts  \n");
+}
+
+void gets (struct VMcontext* ctx, const uint32_t instr){
+
+	const uint8_t r0 = EXTRACT_B1(instr);
+	uint32_t addr = ctx->r[r0].value;
+        uint8_t val;
+	while(true) {
+		val = (uint8_t) getchar();
+		if (val == '\n') break;
+		write_mem(ctx, addr, val);
+		addr++;
+
+        printf("gets  \n");
+}
 
 
 void initFuncs(FunPtr *f, uint32_t cnt) {
@@ -116,6 +209,9 @@ void initRegs(Reg *r, uint32_t cnt)
         r[i].value = 0;
     }
 }
+
+
+
 
 int main(int argc, char** argv) {
     VMContext vm;
