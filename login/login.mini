@@ -1,0 +1,206 @@
+puti r101, 1
+puti r0, 0
+move r2,r0
+puti r1,85
+store r0,r1
+add r0,r0,r101
+puti r1,115
+store r0,r1
+add r0,r0,r101
+puti r1,101
+store r0,r1
+add r0,r0,r101
+puti r1,114
+store r0,r1
+add r0,r0,r101
+puti r1,58
+store r0,r1
+add r0,r0,r101
+puti r1,32
+store r0,r1
+add r0,r0,r101
+puti r1,0
+store r0,r1
+add r0,r0,r101
+puts r2
+gets r100
+puti r1, 0
+move r0, r100
+load r2, r1
+puti r3, 117
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 115
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 101
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 114
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 0
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+puti r1,5
+eq r0, r0,r1
+ite r0, 57,174
+puti r0, 0
+move r2,r0
+puti r1,80
+store r0,r1
+add r0,r0,r101
+puti r1,97
+store r0,r1
+add r0,r0,r101
+puti r1,115
+store r0,r1
+add r0,r0,r101
+puti r1,115
+store r0,r1
+add r0,r0,r101
+puti r1,119
+store r0,r1
+add r0,r0,r101
+puti r1,111
+store r0,r1
+add r0,r0,r101
+puti r1,114
+store r0,r1
+add r0,r0,r101
+puti r1,100
+store r0,r1
+add r0,r0,r101
+puti r1,58
+store r0,r1
+add r0,r0,r101
+puti r1,32
+store r0,r1
+add r0,r0,r101
+puti r1,0
+store r0,r1
+add r0,r0,r101
+puts r2
+gets r100
+puti r1, 0
+move r0, r100
+load r2, r1
+puti r3, 112
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 97
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 115
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 115
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 119
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 111
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 114
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 100
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+load r2, r1
+puti r3, 0
+eq r4,r2,r3
+add r1, r1, r101
+add r0,r0,r4
+puti r1,9
+eq r0, r0,r1
+ite r0, 144,174
+puti r0, 0
+move r2,r0
+puti r1,83
+store r0,r1
+add r0,r0,r101
+puti r1,117
+store r0,r1
+add r0,r0,r101
+puti r1,99
+store r0,r1
+add r0,r0,r101
+puti r1,99
+store r0,r1
+add r0,r0,r101
+puti r1,101
+store r0,r1
+add r0,r0,r101
+puti r1,115
+store r0,r1
+add r0,r0,r101
+puti r1,115
+store r0,r1
+add r0,r0,r101
+puti r1,10
+store r0,r1
+add r0,r0,r101
+puti r1,0
+store r0,r1
+add r0,r0,r101
+puts r2
+halt
+puti r0, 0
+move r2,r0
+puti r1,70
+store r0,r1
+add r0,r0,r101
+puti r1,97
+store r0,r1
+add r0,r0,r101
+puti r1,105
+store r0,r1
+add r0,r0,r101
+puti r1,108
+store r0,r1
+add r0,r0,r101
+puti r1,117
+store r0,r1
+add r0,r0,r101
+puti r1,114
+store r0,r1
+add r0,r0,r101
+puti r1,101
+store r0,r1
+add r0,r0,r101
+puti r1,10
+store r0,r1
+add r0,r0,r101
+puti r1,0
+store r0,r1
+add r0,r0,r101
+puts r2
+halt
+
